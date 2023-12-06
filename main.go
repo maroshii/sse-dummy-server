@@ -27,6 +27,7 @@ func eventsHandler(w http.ResponseWriter, r *http.Request) {
 	go func() {
 		for {
 			data := "data: " + time.Now().Format("15:04:05") + "\n\n"
+			fmt.Println(data)
 			dataChannel <- data
 			time.Sleep(1 * time.Second)
 		}

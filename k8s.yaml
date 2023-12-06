@@ -29,3 +29,23 @@ spec:
     port: 8080
   selector:
     app: sse-dummy-server
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sse-dummy-server
+  annotations:
+    dev.okteto.com/generate-host: sse-dummy-server
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: sse-dummy-server
+            port:
+              number: 8080
+        path: /sse-test
+        pathType: ImplementationSpecific
