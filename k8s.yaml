@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sse-dummy-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sse-dummy-server
+  template:
+    metadata:
+      labels:
+        app: sse-dummy-server
+    spec:
+      containers:
+      - image: maroshii/sse-dummy-server:latest
+        name: sse-dummy-server
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sse-dummy-server
+spec:
+  type: ClusterIP
+  ports:
+  - name: "sse-dummy-server"
+    port: 8080
+  selector:
+    app: sse-dummy-server
